@@ -4,9 +4,23 @@ from IPython.display import display, HTML
 
 
 def display_test_results(results: list[dict[str, Any]], duration_ms: float, memory_mib: float) -> None:
-    """
-    Builds and displays an HTML table showing the results of the test cases,
-    along with performance metrics at the bottom.
+    """Display test results as an interactive HTML table with performance metrics.
+
+    Builds and renders a formatted HTML table showing the results of each test case,
+    including pass/fail status, detailed feedback messages, and clickable hints.
+    Also displays execution time and peak memory usage at the bottom.
+
+    Args:
+        results: List of test result dictionaries, each containing:
+            - var_name (str): The variable or function name being tested.
+            - passed (bool): Whether the test passed.
+            - message (str): Feedback message explaining the result.
+            - hint (str, optional): Hint text to display on failure.
+        duration_ms: Total execution time in milliseconds.
+        memory_mib: Peak memory usage in Mebibytes (MiB).
+
+    Returns:
+        None. Displays output directly in the Jupyter notebook.
     """
 
     # 1. Define clean, unintimidating CSS
@@ -70,9 +84,19 @@ def display_test_results(results: list[dict[str, Any]], duration_ms: float, memo
 
 
 def display_nudge(error_name: str, nudge_text: str) -> None:
-    """
-    Displays a friendly alert box when a student's code throws a runtime error.
-    Designed to be shown right below the standard Jupyter traceback.
+    """Display a friendly error explanation box for runtime errors.
+
+    Shows a styled alert box with a plain-English explanation of a common Python error.
+    Designed to be displayed immediately after the Jupyter traceback to provide
+    helpful context without overwhelming students with technical jargon.
+
+    Args:
+        error_name: The name of the exception (e.g., "ZeroDivisionError").
+        nudge_text: A plain-English explanation of what the error means and
+            how to fix it.
+
+    Returns:
+        None. Displays output directly in the Jupyter notebook.
     """
 
     html = [

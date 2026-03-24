@@ -1,4 +1,9 @@
-# src/testbook/magics.py
+"""IPython magic commands for automated testing in Jupyter notebooks.
+
+Provides the %%test cell magic and %test line magic for running test suites
+against student code with automatic result comparison and error explanation.
+"""
+
 from typing import Any
 from IPython.core.magic import Magics, magics_class, line_cell_magic
 from .compare import compare
@@ -20,10 +25,38 @@ COMMON_ERROR_NUDGES = {
 
 @magics_class
 class BookTest(Magics):
+    """IPython magic command for running automated test suites.
 
-    # Changed from @cell_magic to @line_cell_magic
+    Provides both cell magic (%%test) and line magic (%test) for executing
+    test cases against student code. Compares results, tracks performance,
+    and displays formatted feedback.
+    """
+
     @line_cell_magic
     def test(self, line: str, cell: str | None = None) -> None:
+        """Run a test suite against student code.
+
+        Executes the provided code within the test suite context, compares
+        the resulting variables and functions against expected values, and
+        displays formatted results with performance metrics.
+
+        Args:
+            line: The name of the test suite variable to use (required).
+                Example: "my_test_suite"
+            cell: Optional code to execute when used as a cell magic (%%test).
+                When used as line magic (%test), this is None.
+
+        Returns:
+            None. Displays test results and metrics in the notebook.
+
+        Examples:
+            >>> %%test my_tests
+            >>> x = 42
+            >>> y = x * 2
+
+            Or as line magic:
+            >>> %test my_tests
+        """
         # 1. Setup: Figure out which test suite to use
         test_suite_name = line.strip()
         notebook_memory = self.shell.user_ns
@@ -163,6 +196,16 @@ class BookTest(Magics):
         display_test_results(results, tracker.duration_ms, tracker.memory_mib)
 
 
-# This function tells IPython how to load our custom magic command
 def load_ipython_extension(ipython: Any) -> None:
+    """Load the testbook extension into IPython.
+
+    This function is called automatically when users run '%load_ext testbook'
+    in a Jupyter notebook. It registers the BookTest magic command class.
+
+    Args:
+        ipython: The IPython instance to register the magic with.
+
+    Returns:
+        None.
+    """
     ipython.register_magics(BookTest)

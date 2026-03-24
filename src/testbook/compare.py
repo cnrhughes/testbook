@@ -4,6 +4,36 @@ from typing import Any
 
 
 def compare(expected: Any, actual: Any, path: str = "") -> tuple[bool, str]:
+    """Compare expected and actual values with intelligent type checking.
+
+    Performs deep equality checking with type-aware comparison logic. Handles
+    floating-point tolerance for numeric comparisons, recursive validation of
+    nested structures (lists and dicts), and strict type checking for booleans.
+    Provides detailed error messages indicating the exact location and nature
+    of mismatches.
+
+    Args:
+        expected: The expected value from the test case.
+        actual: The actual value produced by student code.
+        path: Internal parameter tracking the location in nested structures
+            for error messages (e.g., " at index [0] at key 'name'").
+
+    Returns:
+        A tuple of (passed, message) where:
+        - passed (bool): True if values match according to comparison rules.
+        - message (str): "Success" if passed, otherwise a descriptive error message.
+
+    Examples:
+        >>> passed, msg = compare(5, 5)
+        >>> passed
+        True
+
+        >>> passed, msg = compare([1, 2], [1, 3])
+        >>> passed
+        False
+        >>> "Value mismatch" in msg
+        True
+    """
     # 1. Strict Boolean Check
     if isinstance(expected, bool) or isinstance(actual, bool):
         if type(expected) != type(actual):
