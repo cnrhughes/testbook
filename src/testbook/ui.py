@@ -1,8 +1,9 @@
 # src/testbook/ui.py
+from typing import Any
 from IPython.display import display, HTML
 
 
-def display_test_results(results, duration_ms, memory_mib):
+def display_test_results(results: list[dict[str, Any]], duration_ms: float, memory_mib: float) -> None:
     """
     Builds and displays an HTML table showing the results of the test cases,
     along with performance metrics at the bottom.
@@ -68,7 +69,7 @@ def display_test_results(results, duration_ms, memory_mib):
     display(HTML("".join(html)))
 
 
-def display_nudge(error_name, nudge_text):
+def display_nudge(error_name: str, nudge_text: str) -> None:
     """
     Displays a friendly alert box when a student's code throws a runtime error.
     Designed to be shown right below the standard Jupyter traceback.

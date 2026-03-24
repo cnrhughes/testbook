@@ -1,8 +1,9 @@
 # src/testbook/compare.py
 import math
+from typing import Any
 
 
-def compare(expected, actual, path=""):
+def compare(expected: Any, actual: Any, path: str = "") -> tuple[bool, str]:
     # 1. Strict Boolean Check
     if isinstance(expected, bool) or isinstance(actual, bool):
         if type(expected) != type(actual):

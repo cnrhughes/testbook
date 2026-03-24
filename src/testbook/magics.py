@@ -1,4 +1,5 @@
 # src/testbook/magics.py
+from typing import Any
 from IPython.core.magic import Magics, magics_class, line_cell_magic
 from .compare import compare
 from .metrics import PerformanceTracker
@@ -22,7 +23,7 @@ class TestBook(Magics):
 
     # Changed from @cell_magic to @line_cell_magic
     @line_cell_magic
-    def test(self, line, cell=None):
+    def test(self, line: str, cell: str | None = None) -> None:
         # 1. Setup: Figure out which test suite to use
         test_suite_name = line.strip()
         notebook_memory = self.shell.user_ns
@@ -163,5 +164,5 @@ class TestBook(Magics):
 
 
 # This function tells IPython how to load our custom magic command
-def load_ipython_extension(ipython):
+def load_ipython_extension(ipython: Any) -> None:
     ipython.register_magics(TestBook)

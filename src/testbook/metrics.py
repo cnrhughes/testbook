@@ -4,12 +4,12 @@ import tracemalloc
 
 
 class PerformanceTracker:
-    def __init__(self):
-        self.start_time = 0
-        self.end_time = 0
-        self.peak_memory = 0
+    def __init__(self) -> None:
+        self.start_time: float = 0
+        self.end_time: float = 0
+        self.peak_memory: int = 0
 
-    def __enter__(self):
+    def __enter__(self) -> "PerformanceTracker":
         # Start the stopwatch using a highly precise performance counter
         self.start_time = time.perf_counter()
 
@@ -18,7 +18,7 @@ class PerformanceTracker:
 
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         # Stop the stopwatch exactly when the code block finishes or crashes
         self.end_time = time.perf_counter()
 
@@ -31,11 +31,11 @@ class PerformanceTracker:
         tracemalloc.stop()
 
     @property
-    def duration_ms(self):
+    def duration_ms(self) -> float:
         # Convert seconds to milliseconds
         return (self.end_time - self.start_time) * 1000
 
     @property
-    def memory_mib(self):
+    def memory_mib(self) -> float:
         # Convert bytes to Mebibytes (MiB) for a clean, readable number in the UI
         return self.peak_memory / (1024 * 1024)
