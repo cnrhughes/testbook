@@ -1,8 +1,8 @@
-# `testbook`
+# 📚 `testbook`
 
 `testbook` is a Jupyter notebook extension that provides interactive, automated testing and feedback for student code exercises. It integrates seamlessly with Jupyter notebooks using IPython magic commands to validate student solutions with clear, helpful error messages and performance metrics.
 
-## Features
+## ✨ Features
 
 - **Automatic Test Execution**: Run test cases directly in notebook cells using the `test` magic command (as a line or cell magic)
 - **Variable Validation**: Test that students create variables with correct values
@@ -13,7 +13,7 @@
 - **Performance Metrics**: Track execution time and memory usage for each test
 - **Beautiful UI**: Clean HTML table display with pass/fail indicators and detailed feedback
 
-## Installation
+## 📦 Installation
 
 First, ensure you have Python 3.13 or later installed. Then install the package and its dependencies:
 
@@ -25,7 +25,7 @@ uv sync
 pip install -e .
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 ### 1. Load the Extension
 
@@ -54,7 +54,7 @@ from my_tests import my_test_suite
 %test my_test_suite
 ```
 
-## Writing Tests
+## 🧪 Writing Tests
 
 Tests are defined as Python data structures (lists of dictionaries) in a separate `.py` file. There are two types of tests:
 
@@ -145,7 +145,7 @@ dictionary_tests = [
 ]
 ```
 
-## Using Tests in a Notebook
+## 📓 Using Tests in a Notebook
 
 ### Variable Test Example
 
@@ -176,7 +176,7 @@ def add(a, b):
     return a + b
 ```
 
-## Comparison Logic
+## ⚖️ Comparison Logic
 
 `testbook` compares expected and actual values with intelligent type checking:
 
@@ -189,7 +189,7 @@ def add(a, b):
 | **Dictionaries** | Same keys, all values match recursively |
 | **Nested structures** | Recursively validates nested lists/dicts |
 
-## Error Handling
+## ⚠️ Error Handling
 
 When student code crashes, `testbook` catches the error and displays:
 
@@ -205,7 +205,7 @@ When student code crashes, `testbook` catches the error and displays:
 - **KeyError**: "Check that the key exists in your dictionary!"
 - **SyntaxError**: "Check for missing colons, unclosed brackets, or typos in keywords."
 
-## Test Output
+## 📊 Test Output
 
 When a test runs, students see an interactive HTML table with:
 
@@ -217,7 +217,7 @@ When a test runs, students see an interactive HTML table with:
   - Clickable hint (if provided) that appears on failed tests
 - **Metrics footer**: Execution time and peak memory usage
 
-## API Reference
+## 🔧 API Reference
 
 ### Comparison Function
 
@@ -245,21 +245,26 @@ print(f"Time: {tracker.duration_ms:.2f} ms")
 print(f"Memory: {tracker.memory_mib:.2f} MiB")
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 testbook/
 ├── src/testbook/
 │   ├── __init__.py           # Package exports
-│   ├── magics.py             # IPython magic command & test execution
-│   ├── compare.py            # Comparison logic for values
-│   ├── ui.py                 # HTML rendering for results
-│   └── metrics.py            # Performance tracking
+│   ├── magics.py             # IPython magic command & test execution (typed)
+│   ├── compare.py            # Comparison logic for values (typed)
+│   ├── ui.py                 # HTML rendering for results (typed)
+│   └── metrics.py            # Performance tracking (typed)
+├── tests/                    # Comprehensive pytest test suite
+│   ├── test_compare.py
+│   ├── test_metrics.py
+│   ├── test_ui.py
+│   └── test_magics.py
 ├── pyproject.toml            # Project configuration
 └── README.md                 # README
 ```
 
-## Key Components
+## 🔑 Key Components
 
 ### magics.py
 Implements the `%%test` cell magic. When executed:
@@ -288,7 +293,7 @@ Tracks performance using:
 - `tracemalloc` for peak memory usage
 - Context manager pattern for easy integration
 
-## Tips for Instructors
+## 💡 Tips for Instructors
 
 1. **Keep hints concise**: Hints should guide without giving away the solution
 2. **Test edge cases**: Include multiple test cases to catch incomplete solutions
@@ -297,7 +302,7 @@ Tracks performance using:
 5. **Start simple**: Begin with variable tests before function tests
 6. **Incremental complexity**: Build up from basic exercises to more complex ones
 
-## Troubleshooting
+## 🔍 Troubleshooting
 
 ### "Error: Please provide a test suite name"
 Make sure you're using the `test` magic correctly:
@@ -327,13 +332,32 @@ def add(a, b):  # Must accept 2 arguments
     return a + b
 ```
 
-## Development
+## 🧬 Testing
+
+The project includes a comprehensive test suite using pytest. Run tests with:
+
+```bash
+# Using uv
+uv run pytest
+
+# Or using pip
+pytest
+```
+
+Test coverage includes:
+- `tests/test_compare.py`: Comparison logic validation
+- `tests/test_metrics.py`: Performance tracking
+- `tests/test_ui.py`: HTML rendering
+- `tests/test_magics.py`: IPython magic command functionality
+
+## 🛠️ Development
 
 ### Dependencies
 
 - `ipykernel>=7.2.0`: For Jupyter notebook support
-- Python 3.13+: For the core implementation
+- Python 3.13+: For the core implementation and type hints
+- `pytest`: For running the test suite
 
-## License
+## 📄 License
 
 This project is open source and available for educational use.
