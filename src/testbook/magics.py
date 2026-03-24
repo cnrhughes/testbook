@@ -19,7 +19,7 @@ COMMON_ERROR_NUDGES = {
 
 
 @magics_class
-class TestBook(Magics):
+class BookTest(Magics):
 
     # Changed from @cell_magic to @line_cell_magic
     @line_cell_magic
@@ -165,4 +165,4 @@ class TestBook(Magics):
 
 # This function tells IPython how to load our custom magic command
 def load_ipython_extension(ipython: Any) -> None:
-    ipython.register_magics(TestBook)
+    ipython.register_magics(BookTest)
