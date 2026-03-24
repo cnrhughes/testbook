@@ -19,6 +19,10 @@ def compare(expected, actual, path=""):
 
     # 2. Existing Numeric Check
     if isinstance(expected, (int, float)) and isinstance(actual, (int, float)):
+        # Handle NaN case: math.isclose returns False for two NaNs
+        if math.isnan(expected) and math.isnan(actual):
+            return True, "Success"
+
         if math.isclose(expected, actual, rel_tol=1e-09, abs_tol=1e-09):
             return True, "Success"
         return False, f"Value mismatch{path}: Expected {expected}, but got {actual}."
